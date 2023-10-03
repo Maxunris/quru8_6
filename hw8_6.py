@@ -60,7 +60,10 @@ def test_find_suitable_user():
     assert suitable_users == {"name": "Olga", "age": 45}
 
     # TODO найдите всех пользователей младше 20 лет
-    suitable_users = None
+    suitable_users = []
+    for i in users:
+        if i['age'] < 20:
+            suitable_users.append(i)
     assert suitable_users == [
         {"name": "Stanislav", "age": 15},
         {"name": "Maria", "age": 18},
@@ -78,6 +81,14 @@ def test_find_suitable_user():
 # "Open Browser [Chrome]"
 
 
+def print_func_name(func, **kwargs):
+    result_name = func.__name__.replace('_', ' ').title()
+    result_kwargs = ', '.join(map(str, list(kwargs.values())))
+    result =  f'{result_name} [{result_kwargs}]'
+    print(result)
+    return result
+
+
 def test_readable_function():
     open_browser(browser_name="Chrome")
     go_to_companyname_homepage(page_url="https://companyname.com")
@@ -85,15 +96,15 @@ def test_readable_function():
 
 
 def open_browser(browser_name):
-    actual_result = None
+    actual_result = print_func_name(func=open_browser, browser_name=browser_name)
     assert actual_result == "Open Browser [Chrome]"
 
 
 def go_to_companyname_homepage(page_url):
-    actual_result = None
+    actual_result = print_func_name(func=go_to_companyname_homepage, page_url=page_url)
     assert actual_result == "Go To Companyname Homepage [https://companyname.com]"
 
 
 def find_registration_button_on_login_page(page_url, button_text):
-    actual_result = None
+    actual_result = print_func_name(func=find_registration_button_on_login_page, page_url=page_url, button_text=button_text)
     assert actual_result == "Find Registration Button On Login Page [https://companyname.com/login, Register]"
